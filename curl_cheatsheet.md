@@ -1,6 +1,6 @@
 # CURL
 
-> Nota: Si encuentras errores o tienes más opciones dímelas :D<p>
+> Nota: Si encuentras errores o tienes más opciones dímelas :D
 > Última actualización:09-11-2020 fuck year
 
 ## Usando curl con patrones
@@ -18,4 +18,15 @@
 
 ## Envio fichero, upload
 
-    $ curl -F file=@“file.txt" http://target.com/file/upload/
+    $ curl -F file=@“file.txt" http://target/file/upload/
+
+## Estableciendo dns
+
+    $ curl --dns-ipv4-addr 172.16.0.20 http://target
+    $ curl --dns-interface eth1 http://target
+resolver un host con una dirección IP específica
+
+    $ curl --resolve target:80:172.16.0.20 http://target
+
+## Referencias
+* https://isc.sans.edu/forums/diary/Exploiting+the+Power+of+Curl/23934/

@@ -1,6 +1,6 @@
 # CURL
 
-> Nota: Si encuentras errores o tienes más opciones dímelas :D
+> Nota: Si encuentras errores o tienes más opciones dímelas :D<p>
 > Última actualización:09-11-2020 fuck year
 
 ## Usando curl con patrones

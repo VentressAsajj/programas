@@ -1,11 +1,14 @@
 """
-@nuria_imeq
+autor: @nuria_imeq
+fecha: 09-11-2020 ( fuck year)
 Los ficheros worldlist generalmente son muy tochos.
-este programa divide el fichero rockyou en ficheros
-de 20000 lineas, lo cual es mas asumible si vas a lanzar
+Este programa divide el fichero pasado como argumento en ficheros de un numero
+determinado de lineas pasado como argumento, lo cual es mas asumible si vas a lanzar
 un ataque de fuerza bruta.
+Ver ayuda:
+    python3 troceafichero.py -h
 Por ejemplo:
-   $ python troceafichero.py
+   $ python3 troceafichero.py -f userList.txt -t 20000
    $ cd tmp
    $ for i in `ls -1`;
    do
@@ -14,8 +17,7 @@ Por ejemplo:
 	  --userList $i target;
    done
 
-linea completa sin saltos de linea.
-for i in `ls -1`;do proxychains4 python /usr/share/exploitdb/exploits/linux/remote/45233.py --port 22 --threads 8 --outputFile exploit_ssh_$i.txt --outputFormat json --userList $i target;done
+#enjoyhacking #hacktheplanet #timetoplay
 """
 import fileinput
 import os
@@ -24,9 +26,9 @@ import argparse
 
 dir = "tmp"
 
-'''
- Funcion check_Opciones encargada de validar las opciones de entrada
-'''
+###
+# Funcion check_Opciones encargada de validar las opciones de entrada
+###
 def check_Opciones():
     # creamos objeto analizador argparse e indicamos que argumentos esperamos
     # contructor ArgumentParser toma varios argumentos
@@ -46,15 +48,14 @@ def check_Opciones():
     #print(args)
     return fileinput, chunk_size
 
-'''
-Funcion main: principal
-'''
+###
+#Funcion main: principal
+###
 def main():
     (filename, chunk_size) = check_Opciones()
     if ( chunk_size == 0 or not filename):
         print( "Faltan argumentos")
         exit()
-
     try:
         os.mkdir(dir)
     except OSError:
@@ -64,14 +65,19 @@ def main():
         print("Directorio %s creado con exito" % dir)
     try:
         fileout = None
-        for i, line in enumerate(fileinput.input(filename)):
+        i = 0
+        f = open(filename, 'r', errors='ignore' )
+        #for i, line in enumerate(fileinput.input(filename)):
+        for line in f:
             if i % chunk_size == 0:
                 if fileout: fileout.close()
                 fileout = open(dir + "/" + 'salida%d.txt' % (i/chunk_size), 'w')
             fileout.write(line)
+            i += 1
         fileout.close()
     except IOError:
         print("No existe fichero %s" % filename)
+    f.close()
 
 if __name__ == "__main__":
     main()

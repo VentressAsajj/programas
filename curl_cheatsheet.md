@@ -27,6 +27,30 @@
 resolver un host con una dirección IP específica
 
     $ curl --resolve target:80:172.16.0.20 http://target
+## Http headers
+
+    $ curl --header "X-Application: BotClient" http://target/
+    $ curl --referer http://www.domain.com/login.php http://target
+   Si has almacenado las cookies de sesión con la opción **--cookie-jar** puede ser útil no usar las cookies de sesión.
+   
+
+    $ curl --cookie cookies.txt --junk-session-cookies http://target
+   
+   ## Encadenando peticiones
+   
+
+    $ curl target --next -d $data_to_post target
+
+## Traza de la petición
+
+    $ curl --trace - https://target
+   
+  eliminar el dump hexadecimal con la opción **--trace-ascii**
+ 
+## Dejando logs
+
+    $ curl --silent --write-out "Response code: %{http_code}\nTotal time: %{time_total}" https://target
+  recuerda poner **--silent | -s** para no ensuciar el log
 
 ## Referencias
 * https://isc.sans.edu/forums/diary/Exploiting+the+Power+of+Curl/23934/
